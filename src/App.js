@@ -3,13 +3,15 @@ import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import { HomePage } from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
+import { Navigation } from "./components/navigation/navigation.component";
 
 function App() {
   return (
     <div>
+      <Navigation />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/shops" component={ShopPage} />
+        <Route path="/shop" component={ShopPage} />
       </Switch>
     </div>
   );
