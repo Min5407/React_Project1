@@ -5,7 +5,7 @@ import { HomePage } from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import { Navigation } from "./components/navigation/navigation.component";
 import Sign from "./pages/sign/sign-in-up.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   constructor() {
@@ -17,9 +17,24 @@ class App extends React.Component {
 
   unsubscribeFromAuth = null;
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       //user = information of the user
-      this.setState({ currentUser: user });
+
+      if (userAuth) {
+        //createUserProfileDocument fucntion will add in the database and bring userRef
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 
@@ -30,7 +45,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation currentUser={this.state.currentUser} />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
