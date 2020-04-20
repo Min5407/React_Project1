@@ -4,24 +4,31 @@ import "./sing-in.style.scss";
 import { FormInput } from "../form-input/form-input.component";
 import { Button } from "../button/button.component";
 
-import { googleSignIn } from "../../firebase/firebase.utils.js";
+import { auth, googleSignIn } from "../../firebase/firebase.utils.js";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
   }
 
-  handelSubmit = event => {
+  handelSubmit = async (event) => {
     event.preventDefault();
 
-    this.setstate({ email: "", password: "" });
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     //setstate below will check the name of the input and if its same set the state with the value
     this.setState({ [name]: value });

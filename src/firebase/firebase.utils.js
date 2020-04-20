@@ -10,7 +10,7 @@ const config = {
   storageBucket: "react-online-shopping.appspot.com",
   messagingSenderId: "814351674225",
   appId: "1:814351674225:web:ff31bffd027853e82d64d0",
-  measurementId: "G-6Q6JVCEL7E"
+  measurementId: "G-6Q6JVCEL7E",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -28,7 +28,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createDate,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("failed to create user", error.message);
