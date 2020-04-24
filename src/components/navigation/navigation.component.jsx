@@ -4,8 +4,9 @@ import "./navigation.style.scss";
 // In order to import svg file need to use syntax ReactComponent below
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { auth } from "../../firebase/firebase.utils";
+import { connect } from "react-redux";
 
-export const Navigation = ({ currentUser }) => (
+const Navigation = ({ currentUser }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo"></Logo>
@@ -30,3 +31,8 @@ export const Navigation = ({ currentUser }) => (
     </div>
   </div>
 );
+
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+export default connect(mapStateToProps)(Navigation);
