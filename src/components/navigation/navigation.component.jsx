@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./navigation.style.scss";
+import CartIcon from "../cartIcon/cart-icon.component";
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 // In order to import svg file need to use syntax ReactComponent below
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { auth } from "../../firebase/firebase.utils";
@@ -28,7 +30,11 @@ const Navigation = ({ currentUser }) => (
           Sign In
         </Link>
       )}
+
+      <CartIcon />
     </div>
+
+    <CartDropDown />
   </div>
 );
 
