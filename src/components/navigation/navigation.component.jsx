@@ -8,7 +8,7 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 
-const Navigation = ({ currentUser }) => (
+const Navigation = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo"></Logo>
@@ -33,12 +33,15 @@ const Navigation = ({ currentUser }) => (
 
       <CartIcon />
     </div>
-
-    <CartDropDown />
+    {!hidden ? <CartDropDown /> : null}
   </div>
 );
+//mapStateToProps is used to get state from global state which is from rootReducer
+//the function below wil get state.user.currentUser and state.cart.hidden
+//where state is global state from rootReducer
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden,
 });
 export default connect(mapStateToProps)(Navigation);

@@ -4,6 +4,22 @@
   flex-direction: column;
   height: 350px;
   align-items: center;
+  position: relative;
+
+  Button {
+    position: absolute;
+    bottom: 20%;
+    opacity: 0.8;
+    visibility: hidden;
+  }
+  &:hover {
+    .image {
+      opacity: 0.8;
+    }
+    Button {
+      visibility: visible;
+    }
+  }
 
   .image {
     width: 100%;
@@ -17,7 +33,7 @@
     width: 100%;
     height: 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     font-size: 18px;
     padding: 1rem;
 
@@ -27,7 +43,8 @@
     }
 
     .price {
-      width: 10%;
+      width: 20%;
+      text-align: center;
     }
   }
 }
