@@ -28,4 +28,19 @@
     margin-left: auto;
     font-size: 36px;
   }
+  .fake-cards {
+    width: 1000px;
+    margin: auto 0;
+
+    h1 {
+      text-decoration: underline;
+      color: Red;
+      text-align: center;
+    }
+    .flex {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+  }
 }
