@@ -38,6 +38,40 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const convertCollectionSnapshotsToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title: title,
+      items: items,
+    };
+  });
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = fireStore.collection(collectionKey);
+  // console.log(collectionRef);
+
+  //batch will group all the document and request at once so that either the whole data fails to upload or succeed .
+  // prevent adding some data only if any internet connection drops
+  const batch = fireStore.batch();
+
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

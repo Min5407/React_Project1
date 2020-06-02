@@ -11,7 +11,13 @@ const StripeFakeCard = ({ type, cardNumber, logo }) => (
       </span>
       <span>CVC: 123</span>
 
-      <img class="card__logo" width="40px" height="40px" src={logo} />
+      <img
+        alt="credit-card"
+        class="card__logo"
+        width="40px"
+        height="40px"
+        src={logo}
+      />
     </div>
   </div>
 );

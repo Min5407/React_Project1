@@ -13,7 +13,7 @@ export const AddItemToCart = (cartItems, cartItemToAdd) => {
     );
   } else {
     //   the code below will create quatity property in the object since there is not quantity property in the beginning
-    return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+    return [{ ...cartItemToAdd, quantity: 1 }, ...cartItems];
   }
 };
 

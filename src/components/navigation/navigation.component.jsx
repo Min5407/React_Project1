@@ -14,32 +14,31 @@ import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
+import {
+  NavContainer,
+  Options,
+  OptionDiv,
+  OptionLink,
+} from "./navigation.style";
+
 const Navigation = ({ currentUser, hidden }) => (
-  <div className="header">
+  <NavContainer>
     <Link className="logo-container" to="/">
       <Logo className="logo"></Logo>
     </Link>
 
-    <div className="options">
-      <Link className="option" to="/shop">
-        Shop
-      </Link>
-      <Link className="option" to="/shop">
-        Contact
-      </Link>
+    <Options>
+      <OptionLink to="/shop">Shop</OptionLink>
+      <OptionLink to="/shop">Contact</OptionLink>
       {currentUser ? (
-        <div className="option" onClick={() => auth.signOut()}>
-          Sign out
-        </div>
+        <OptionDiv onClick={() => auth.signOut()}>Sign out</OptionDiv>
       ) : (
-        <Link className="option" to="/sign">
-          Sign In
-        </Link>
+        <OptionLink to="/sign">Sign In</OptionLink>
       )}
       <CartIcon />
-    </div>
+    </Options>
     {!hidden ? <CartDropDown /> : null}
-  </div>
+  </NavContainer>
 );
 //mapStateToProps is used to get state from global state which is from rootReducer
 //the function below wil get state.user.currentUser and state.cart.hidden

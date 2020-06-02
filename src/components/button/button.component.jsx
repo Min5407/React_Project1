@@ -1,18 +1,5 @@
 import React from "react";
-import "./button.style.scss";
-
-export const Button = ({
-  children,
-  googleButton,
-  addToCart,
-  ...otherProps
-}) => (
-  <button
-    className={`${googleButton ? "googleBtn" : ""} ${
-      addToCart ? "addToCart" : ""
-    } custom-button`}
-    {...otherProps}
-  >
-    {children}
-  </button>
+import { ButtonContainer } from "./button.style";
+export const Button = ({ children, ...props }) => (
+  <ButtonContainer {...props}>{children}</ButtonContainer>
 );
