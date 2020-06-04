@@ -10,6 +10,9 @@ import { updateCollections } from "../../redux/shop/shop.action";
 class ShopPage extends React.Component {
   unsubscribeFromSnapshot = null;
 
+  componentWillMount() {
+    console.log("will mount");
+  }
   componentDidMount() {
     const { updateCollections } = this.props;
     const collectionRef = fireStore.collection("collections");
@@ -22,6 +25,7 @@ class ShopPage extends React.Component {
 
   render() {
     const { match } = this.props;
+    console.log("shop mounted");
     return (
       //the reason why match is passed as a prop in this component is because this component is wraaped in Router in the app js.
       <div className="shop-page ">
