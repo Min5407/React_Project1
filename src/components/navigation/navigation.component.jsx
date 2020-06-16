@@ -29,7 +29,6 @@ const Navigation = ({ currentUser, hidden }) => (
 
     <Options>
       <OptionLink to="/shop">Shop</OptionLink>
-      <OptionLink to="/shop">Contact</OptionLink>
       {currentUser ? (
         <OptionDiv onClick={() => auth.signOut()}>Sign out</OptionDiv>
       ) : (
